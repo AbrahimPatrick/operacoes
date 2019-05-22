@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jogo das Operações</title>
+
+    <link rel="stylesheet" href="css/libs/bootstrap-4.2.1/css/bootstrap.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fireworks.css">
+
+    <style>
+
+    </style>
+</head>
+<body>
+<div class=" d-xs-none d-sm-none d-md-block d-lg-block">
+    <nav class="btn-group options fixed-top">
+        <button type="button" class="btn btn-secondary" onclick="arithmetic_game.instructions()">Regras</button>
+        <button type="button" class="btn btn-secondary" onclick="arithmetic_game.scoreboard()">Placar</button>
+        <button type="button" class="btn btn-secondary">Configurações</button>
+        <button type="button" class="btn btn-secondary" onclick="arithmetic_game.restart()" title="Restart this game">
+            Reiniciar
+        </button>
+    </nav>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-9 col-lg-9" style="left: 54px; margin-top: 50px">
+            <div class="game"></div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3 margin-top-100">
+            <div class="d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="dice" onclick="arithmetic_game.gamble_play()"><img src="img/plus.png" alt=""
+                                                                                       class="img-fluid"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="gamble" onclick="arithmetic_game.gamble_play()" id="gamble"></div>
+                        <div style="position: relative; top: -80px; left: 114px;" class="celebrate wrap z-index-0">
+                            <iframe src="img/gif/giphy.webp" class="frame draggable giphy-embed click-event-off" width="540" height="540" frameBorder="0" allowFullScreen>
+
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Center -->
+<div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCenterTitle">
+                    <!-- Recebe pelo jQuery -->
+                </h5>
+            </div>
+            <div class="modal-body black_board" id="modalCenterBody">
+                <!-- Recebe pelo jQuery -->
+            </div>
+            <div class="modal-footer" id="modalCenterFooter">
+                <!-- Recebe pelo jQuery -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Center -->
+<div class="modal fade" id="modalGameOver" tabindex="-1" role="dialog" aria-labelledby="modalGameOverTitle"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title black_board" id="modalGameOverTitle">
+                    <!-- Recebe pelo jQuery -->
+                </h5>
+            </div>
+            <div class="modal-body black_board" id="modalGameOverBody">
+                <!-- Recebe pelo jQuery -->
+            </div>
+            <div class="modal-footer" id="modalGameOverFooter">
+                <!-- Recebe pelo jQuery -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Long -->
+<div class="modal fade" id="modalLong" tabindex="-1" role="dialog" aria-labelledby="modalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLongTitle">
+                    <!-- Recebe pelo jQuery -->
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalLongBody">
+                <!-- Recebe pelo jQuery -->
+            </div>
+            <div class="modal-footer" id="modalLongFooter">
+                <!-- Recebe pelo jQuery -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/libs/jquery-3.4.1.min.js"></script>
+<script src="js/libs/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="js/libs/jquery-ui-1.12.1/jquery.ui.touch-punch.min.js"></script>
+<script src="js/libs/popper.min.js"></script>
+<script src="js/libs/bootstrap-4.2.1/js/bootstrap.js"></script>
+<script src="js/arithmetic_game.js"></script>
+<script>
+    arithmetic_game.instructions();
+    arithmetic_game.init(document.querySelector('.game'));
+    arithmetic_game.initGamble(document.querySelector('.gamble'));
+    arithmetic_game.start();
+</script>
+<script>
+    $(function () {
+        $("#gamble").draggable();
+        $(".dice").draggable();
+        $(".game").draggable();
+        $(".options").draggable();
+        $(".draggable").draggable({
+            iframeFix: true
+        });
+        $(".celebrate").draggable();
+        $('img').off('click');
+    });
+</script>
+</body>
+</html>

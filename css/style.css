@@ -1,0 +1,187 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #dad8ff;
+}
+
+.bg-none {
+    background-color: rgba(0, 62, 255, 0);
+}
+
+.z-index-0 {
+    z-index: 0;
+}
+
+.options {
+    margin: 0 10px 0 10px;
+}
+
+.game {
+    position: relative; left: 101.5px; top: -38px;
+    transform: rotate(422deg);
+    max-width: 100vw;
+    max-height: 100vw;
+    margin: 0 auto;
+    margin-top: 100px;
+    color: #34495e;
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+
+.game > div {
+    margin: 24px 0px 2px 60px;
+    border: 0 solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.potes {
+    transform: rotate(300deg);
+    position: absolute;
+    z-index: 1;
+}
+
+.number_pote {
+    transform: rotate(299deg);
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 2em;
+    padding: 0px 1px 35px 0px;
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    z-index: 2;
+}
+
+.margin-top-100 {
+    margin-top: 100px;
+}
+
+.dice {
+    width: 70px;
+    height: 70px;
+    left: 89px; top: 30px;
+    z-index: 1;
+}
+
+.black_board {
+    font-family: "Walter Turncoat", cursive;
+    font-size: 2em;
+    color: white;
+    background-color: #34495e;
+}
+
+.gamble {
+    width: 50px;
+    height: 50px;
+    background-color: #34495e;
+    color: #fff;
+    display: grid;
+    position: relative;
+    left: 29px; top: -30px;
+    z-index: 1;
+}
+
+.gamble > div {
+    border: 6px solid #2c3e50;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    border: 5px solid #2c3e50;
+    background-color: #34495e;
+    color: white;
+    margin-top: 10px;
+    padding: 10px 20px
+}
+
+.restart-btn {
+
+    margin: 150px 0px 0px 343px;
+}
+
+.text-disabled {
+    color: #9fadee;
+}
+
+.bg_turn_loading {
+    background-color: #97f5ff;
+    color: #34495e;
+}
+
+.bg_turn_start {
+    background-color: #ffd300;
+    color: #34495e;
+}
+
+.bg_turn_done {
+    background-color: #75ff21;
+    color: #34495e;
+}
+
+.border_turn_loading{
+    border-color: yellow;
+}
+
+.game > div.winner {
+    background: yellow;
+}
+
+.game > div.winner > span {
+    color: blue;
+}
+
+/*@media (min-width: 10px) {*/
+.game {
+    max-width: 103px;
+    min-width: 50px;
+    max-height: 0;
+    border-radius: 0;
+    border: 0 solid #ffffff;
+}
+
+.game > div {
+    border-radius: 0;
+}
+
+.wrap {
+    width: 400px;
+    height: 600px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.wrap > body {
+    width: 400px;
+    height: 600px;
+}
+
+.frame {
+    width: 1200px;
+    height: 1800px;
+    border: 0;
+    -ms-transform: scale(0.25);
+    -moz-transform: scale(0.25);
+    -o-transform: scale(0.25);
+    -webkit-transform: scale(0.25);
+    transform: scale(0.25);
+
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+@media (min-width: 1024px) {
+    .btn {
+        cursor: pointer
+    }
+}
