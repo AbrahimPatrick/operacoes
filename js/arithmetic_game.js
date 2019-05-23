@@ -22,6 +22,7 @@ const arithmetic_game = {
     total_turns: 0,
     container_element: null,
     container_element_gamble: null,
+    container_element_ball: null,
     gameover: false,
     modal_delay: 500,
 
@@ -42,6 +43,10 @@ const arithmetic_game = {
 
     initGamble(container) {
         this.container_element_gamble = container;
+    },
+
+    initBall(container) {
+        this.container_element_ball = container;
     },
 
     calc() {
@@ -130,6 +135,7 @@ const arithmetic_game = {
             $(".game").addClass("text-disabled");
             this.draw();
             this.drawGamble('Pronto!');
+            this.drawBall();
 
         } else if (this.turn.turn_index === 2) {
             this.last_value = element;
@@ -207,12 +213,14 @@ const arithmetic_game = {
         this.turn.turn_index = 0;
         this.draw();
         this.drawGamble('Dado');
+        this.drawBall();
         console.log("Jogo começou! Alcance o total de " + this.target + " pontos no menor número de turnos possiveis.");
         this.gameover = false;
         $(".gamble").removeClass("bg_turn_loading");
         $(".gamble").removeClass("bg_turn_done");
         $(".gamble").removeClass("bg_turn_start");
         $(".game").removeClass("text-disabled");
+        $("#ball").draggable({revert:true});
     },
 
     new_turn() {
@@ -220,6 +228,7 @@ const arithmetic_game = {
         this.turn.turn_index = 0;
         this.draw();
         this.drawGamble('Dado');
+        this.drawBall();
         this.gameover = false;
         $(".gamble").removeClass("bg_turn_loading");
         $(".gamble").removeClass("bg_turn_done");
@@ -297,10 +306,14 @@ const arithmetic_game = {
     draw() {
         this.container_element.innerHTML = this.board.map((element, index) =>
             // $image = this.pote_bulk(element);
-            `<div class=""><img src="${this.pote_bulk(element)}" alt="" class="potes img-fluid"><p class="number_pote"  onclick="arithmetic_game.make_play('${index}', '${element}')">${element}</p></div>`).reduce((content, current) => content + current);
+            `<div class=""><img src="${this.pote_bulk(element)}" alt="" class="potes img-fluid"><p class="number_pote droppable"><input type="hidden" name="index" class="index" value="${index}"><input type="hidden" name="element" class="element" value="${element}">${element}</p></div>`).reduce((content, current) => content + current);
     },
 
     drawGamble(symbol) {
         this.container_element_gamble.innerHTML = '<div><i class="fas fa-dice-d6"></i></div>';
+    },
+
+    drawBall() {
+        this.container_element_ball.innerHTML = '<div id="ball"><img src="img/ball.svg"></div>';
     },
 };

@@ -19,7 +19,9 @@ body {
 }
 
 .game {
-    position: relative; left: 101.5px; top: -38px;
+    position: relative;
+    left: 101.5px;
+    top: -38px;
     transform: rotate(422deg);
     max-width: 100vw;
     max-height: 100vw;
@@ -59,18 +61,87 @@ body {
     margin-top: 100px;
 }
 
-.dice {
-    width: 70px;
-    height: 70px;
-    left: 89px; top: 30px;
-    z-index: 1;
-}
-
 .black_board {
     font-family: "Walter Turncoat", cursive;
     font-size: 2em;
     color: white;
     background-color: #34495e;
+}
+@media only screen and (min-width: 600px) and (max-width: 999px) {
+    .celebrate {
+        position: relative;
+        top: -80px;
+        left: 589px;
+        display: grid;
+    }
+
+    #ball {
+        position: absolute; z-index: 1000; left: 437px; top: 528px;
+    }
+
+    #carpet {
+        transform: rotate(325deg);
+        width: 100px;
+        height: 60px;
+        background-color: #1e7e34;
+        position: absolute; z-index: 0; left: 409px; top: 515px;
+    }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1099px) {
+    .celebrate {
+        position: relative;
+        top: -80px;
+        left: 800px;
+        display: grid;
+    }
+
+    #ball {
+        position: absolute;
+        z-index: 1000;
+        left: 516.922px;
+        top: 537.688px;
+    }
+
+    #carpet {
+        transform: rotate(325deg);
+        width: 100px;
+        height: 60px;
+        background-color: #1e7e34;
+        position: absolute; z-index: 0; left: 490px; top: 530px;
+    }
+}
+@media only screen and (min-width: 1100px) {
+    .celebrate {
+        position: relative;
+        top: -80px;
+        left: 1150px;
+        display: grid;
+    }
+
+    #ball {
+        position: absolute; z-index: 1000; left: 700px;top: 515px;
+    }
+
+    .ball-backup {
+        position: absolute; z-index: 1000; left: 701.91px; top: 522.674px;
+    }
+
+    #carpet {
+        transform: rotate(325deg);
+        width: 100px;
+        height: 60px;
+        background-color: #1e7e34;
+        position: absolute; z-index: 0; left: 670px; top: 510px;
+    }
+}
+
+.dice {
+    width: 70px;
+    height: 70px;
+    left: -71px;
+    top: 142px;
+    z-index: 1;
 }
 
 .gamble {
@@ -80,7 +151,8 @@ body {
     color: #fff;
     display: grid;
     position: relative;
-    left: 29px; top: -30px;
+    left: -131px;
+    top: 72px;
     z-index: 1;
 }
 
@@ -126,7 +198,7 @@ body {
     color: #34495e;
 }
 
-.border_turn_loading{
+.border_turn_loading {
     border-color: yellow;
 }
 

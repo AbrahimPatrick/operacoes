@@ -14,7 +14,16 @@
     <link rel="stylesheet" href="css/fireworks.css">
 
     <style>
+        .gate {
+            cursor: pointer;
+            margin-bottom: 100px;
+            width: 83px;
+            height: 46px;
+        }
 
+        .select {
+        /* Isso é um marcador para o ES6 */
+        }
     </style>
 </head>
 <body>
@@ -32,26 +41,17 @@
     <div class="row">
         <div class="col-xs-10 col-sm-10 col-md-9 col-lg-9" style="left: 54px; margin-top: 50px">
             <div class="game"></div>
+            <div class="ball"></div>
+            <div id="carpet"></div>
         </div>
-        <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3 margin-top-100">
-            <div class="d-flex justify-content-center">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="dice" onclick="arithmetic_game.gamble_play()"><img src="img/plus.png" alt=""
-                                                                                       class="img-fluid"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="gamble" onclick="arithmetic_game.gamble_play()" id="gamble"></div>
-                        <div style="position: relative; top: -80px; left: 114px;" class="celebrate wrap z-index-0">
-                            <iframe src="img/gif/giphy.webp" class="frame draggable giphy-embed click-event-off" width="540" height="540" frameBorder="0" allowFullScreen>
+        <div class="dice" onclick="arithmetic_game.gamble_play()"><img src="img/plus.png" alt=""
+                                                                       class="img-fluid"></div>
+        <div class="gamble" onclick="arithmetic_game.gamble_play()" id="gamble"></div>
+        <div style="" class="celebrate wrap z-index-0">
+            <iframe src="img/gif/giphy.webp" class="frame giphy-embed click-event-off"
+                    width="540" height="540" frameBorder="0" allowFullScreen>
 
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </iframe>
         </div>
     </div>
 </div>
@@ -128,6 +128,7 @@
     arithmetic_game.instructions();
     arithmetic_game.init(document.querySelector('.game'));
     arithmetic_game.initGamble(document.querySelector('.gamble'));
+    arithmetic_game.initBall(document.querySelector('.ball'));
     arithmetic_game.start();
 </script>
 <script>
@@ -139,9 +140,82 @@
         $(".draggable").draggable({
             iframeFix: true
         });
+        $("#ball").draggable();
         $(".celebrate").draggable();
         $('img').off('click');
     });
+    $('.gate').off('click');
+</script>
+<script>
+    let currentDroppable = null;
+
+    ball.onmousedown = function (event) {
+
+        let shiftX = event.clientX - ball.getBoundingClientRect().left;
+        let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+        ball.style.position = 'absolute';
+        ball.style.zIndex = 1000;
+        document.body.append(ball);
+
+        moveAt(event.pageX, event.pageY);
+
+        function moveAt(pageX, pageY) {
+            ball.style.left = pageX - shiftX + 'px';
+            ball.style.top = pageY - shiftY + 'px';
+        }
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+
+            ball.hidden = true;
+            let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+            ball.hidden = false;
+
+            if (!elemBelow) return;
+
+            let droppableBelow = elemBelow.closest('.droppable');
+            if (currentDroppable != droppableBelow) {
+                if (currentDroppable) { // null when we were not over a droppable before this event
+                    leaveDroppable(currentDroppable);
+                }
+                currentDroppable = droppableBelow;
+                if (currentDroppable) { // null if we're not coming over a droppable now
+                    // (maybe just left the droppable)
+                    enterDroppable(currentDroppable);
+                }
+            }
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        ball.onmouseup = function () {
+            document.removeEventListener('mousemove', onMouseMove);
+            ball.onmouseup = null;
+            $index = $(".select").find(".index").val();
+            $element = $(".select").find(".element").val();
+            $(".select").removeClass("select");
+
+            if ($index != null && $element != null ) {
+                arithmetic_game.make_play($index, $element);
+            }
+        };
+
+    };
+
+    function enterDroppable(elem) {
+        elem.style.background = 'pink';
+        elem.classList.add("select");
+    }
+
+    function leaveDroppable(elem) {
+        elem.style.background = '';
+        elem.classList.remove("select");
+    }
+
+    ball.ondragstart = function () {
+        return false;
+    };
 </script>
 </body>
 </html>
