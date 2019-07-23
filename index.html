@@ -31,7 +31,7 @@
     <nav class="btn-group options fixed-top">
         <button type="button" class="btn btn-secondary" onclick="arithmetic_game.instructions()">Regras</button>
         <button type="button" class="btn btn-secondary" onclick="arithmetic_game.scoreboard()">Placar</button>
-        <button type="button" class="btn btn-secondary">Configurações</button>
+        <button type="button" class="btn btn-secondary" onclick="arithmetic_game.form_config()">Configurações</button>
         <button type="button" class="btn btn-secondary" onclick="arithmetic_game.restart()" title="Restart this game">
             Reiniciar
         </button>
@@ -76,7 +76,49 @@
         </div>
     </div>
 </div>
-<!-- Modal Center -->
+
+<!-- Modal Center Config -->
+<div class="modal fade" id="modalConfig" tabindex="-1" role="dialog" aria-labelledby="modalConfigTitle"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalConfigTitle">
+                    Configurações do jogo
+                </h5>
+            </div>
+            <div class="modal-body" id="modalConfigBody">
+                <div class="form-group row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <label for="password">Senha:</label>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Senha">
+                    </div>
+                </div><div class="form-group row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <label for="target">Objetivo:</label>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input type="number" id="target" name="target" class="form-control" placeholder="Pontos">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <label for="max_number">Base numérica:</label>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input type="number" id="max_number" name="max_number" class="form-control" placeholder="[1...100]">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" id="modalConfigFooter">
+                    <button class="btn" onclick="arithmetic_game.salve_config()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Long Game Over -->
 <div class="modal fade" id="modalGameOver" tabindex="-1" role="dialog" aria-labelledby="modalGameOverTitle"
      aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" role="document">
@@ -129,6 +171,7 @@
     arithmetic_game.init(document.querySelector('.game'));
     arithmetic_game.initGamble(document.querySelector('.gamble'));
     arithmetic_game.initBall(document.querySelector('.ball'));
+    arithmetic_game.drawBall();
     arithmetic_game.start();
 </script>
 <script>

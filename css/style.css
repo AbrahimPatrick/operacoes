@@ -136,6 +136,31 @@ body {
     }
 }
 
+@media only screen and (min-width: 1500px) {
+    .celebrate {
+        position: relative;
+        top: -80px;
+        left: 1220px;
+        display: grid;
+    }
+
+    #ball {
+        position: absolute; z-index: 1000; left: 700px;top: 515px;
+    }
+
+    .ball-backup {
+        position: absolute; z-index: 1000; left: 701.91px; top: 522.674px;
+    }
+
+    #carpet {
+        transform: rotate(325deg);
+        width: 100px;
+        height: 60px;
+        background-color: #1e7e34;
+        position: absolute; z-index: 0; left: 670px; top: 510px;
+    }
+}
+
 .dice {
     width: 70px;
     height: 70px;

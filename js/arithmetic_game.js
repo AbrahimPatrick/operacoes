@@ -3,7 +3,7 @@ const arithmetic_game = {
 
     // ATTRIBUTES
     random: 0,
-    target: 10,
+    target: 50,
     max_number: 9,
     board: [],
     gamble: [],
@@ -25,8 +25,17 @@ const arithmetic_game = {
     container_element_ball: null,
     gameover: false,
     modal_delay: 500,
+    img: [
+        "img/gif/gru.gif", "img/gif/minions_clap.webp", "img/gif/minions_clap.webp",
+        "img/gif/minions_funny.webp", "img/gif/minions_happy.webp", "img/gif/one_minion.webp",
+    ],
 
     // FUNCTIONS
+    random_value(value) {
+        var random_value = Math.random() * value;
+        return random_value;
+    },
+
     random_integer(value) {
         this.random = Math.random() * value;
         return this.random.toFixed();
@@ -135,7 +144,7 @@ const arithmetic_game = {
             $(".game").addClass("text-disabled");
             this.draw();
             this.drawGamble('Pronto!');
-            this.drawBall();
+            // this.drawBall();
 
         } else if (this.turn.turn_index === 2) {
             this.last_value = element;
@@ -163,7 +172,9 @@ const arithmetic_game = {
     check_winning() {
         if (this.points >= this.target) {
             this.total_turns++;
-            var modal_header = '<img src="img/gif/gru.gif" class="img-fluid" alt="Imagem do Malvado Favorito Comemorando">';
+            var int = this.img.length;
+            var random = this.random_value(parseInt(int));
+            var modal_header = '<img src="'+this.img[parseInt(random)]+'" class="img-fluid" alt="Imagem do Malvado Favorito Comemorando">';
             var modal_body = 'Fim de Jogo! Parabéns, você alcançou o número de pontos. <br><hr>' +
                 'Acertos: '+ this.right_question + '. <br>' +
                 'Erros: '+ this.wrong_question + '. <br>' +
@@ -201,6 +212,8 @@ const arithmetic_game = {
         console.log('GAME OVER');
         this.points = 0;
         this.total_turns = 0;
+        this.wrong_question = 0;
+        this.right_question = 0;
         this.restart();
     },
 
@@ -213,7 +226,7 @@ const arithmetic_game = {
         this.turn.turn_index = 0;
         this.draw();
         this.drawGamble('Dado');
-        this.drawBall();
+        // this.drawBall();
         console.log("Jogo começou! Alcance o total de " + this.target + " pontos no menor número de turnos possiveis.");
         this.gameover = false;
         $(".gamble").removeClass("bg_turn_loading");
@@ -228,7 +241,7 @@ const arithmetic_game = {
         this.turn.turn_index = 0;
         this.draw();
         this.drawGamble('Dado');
-        this.drawBall();
+        // this.drawBall();
         this.gameover = false;
         $(".gamble").removeClass("bg_turn_loading");
         $(".gamble").removeClass("bg_turn_done");
@@ -249,7 +262,18 @@ const arithmetic_game = {
     instructions() {
         var modal_header = 'Guia do Jogo das Operações';
 
-        var modal_body = 'Coloque as instruções aqui';
+        var modal_body = '<strong><em>Objetivo: Alcançar um número de pontos, que serão atingidos somando os resultados das operações realizadas a cada rodada.</em></strong>' +
+            '<hr>' +
+            '<ul>' +
+            '<li>Coloque a bola no potinho com o número desejado;</li>' +
+            '<li>Clique no dado para descobrir a operação aritmética que irá fazer;</li>' +
+            '<li>Escolha um segundo potinho, arrastando a bola até ele;</li>' +
+            '<li>Responda à pergunta;</li>' +
+            '<li>Se acertar, o resultado da operação será contado como seus pontos. Se errar, poderá tentar acertar na próxima rodada;</li>' +
+            '<li>Uma nova rodada se inicia automaticamente;</li>' +
+            '<li>O jogo acaba quando a soma dos resultados respondidos corretamente atinge a pontuação determinada;</li>' +
+            '<li>Depois da vitória, aparecem seis animações diferentes. Continue jogando para conhecer todas!</li>' +
+            '</ul>';
         var modal_footer = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Quero Jogar!</button>';
 
         $("#modalLongTitle").html(modal_header);
@@ -257,6 +281,21 @@ const arithmetic_game = {
         $("#modalLongFooter").html(modal_footer);
 
         $("#modalLong").modal("show");
+    },
+
+    form_config() {
+        $("#modalConfig").modal("show");
+    },
+
+    salve_config() {
+        var password = $("input#password").val();
+        if (password === "professor") {
+            this.target = parseInt($("input#target").val());
+            this.max_number = parseInt($("input#max_number").val());
+            this.restart();
+        }
+        $("input#password").val("");
+        $("#modalConfig").modal("hide");
     },
 
     scoreboard() {
